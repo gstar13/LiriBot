@@ -4,3 +4,4 @@ Why the project is useful: This project is useful as we used it to learn how to 
 How users can get started with the project: To use this program, one must first be in the file in the terminal. Then input "node liri.js [command][search-topic]" where the options for the command are "music-this", "spotify-this-song", "concert-this" or "do-what-it-says". The "search-topic" can be any movie, song or band according to what command the user wants to use.
 Where users can get help with your project: To get help with this project email the developer at ginazavala004@gmail.com.
 Who maintains and contributes to the project: Currently, only the dev Gina maintains or contributes to the project with the support of the UCLA Coding Bootcamp staff.
+You can see a video of the program in action at https://youtu.be/bEQs6iV3jM4
