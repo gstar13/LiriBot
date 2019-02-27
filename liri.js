@@ -87,8 +87,7 @@ fs.appendFile("log.txt", doItResponseResults,function(err, data) {
 });
 })
 }
-//})
-//}
+
 ///command center
 if (operator == 'concert-this') {
     console.log("Upcoming concert information for " + searchTopic);
