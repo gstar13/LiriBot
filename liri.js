@@ -1,5 +1,9 @@
 require("dotenv").config();
 var keys = require("./keys.js");
+var fs = require("fs");
+var axios = require("axios");
+var moment = require("moment");
+var Spotify = require('node-spotify-api');
 
 //global variables
 var operator = process.argv[2];
@@ -7,8 +11,7 @@ var searchTopic = process.argv[3];
 //function center
 //Bands In Town
 var concertThis = function bandsInTownResponse() {
-    var axios = require("axios");
-    var moment = require("moment");
+    
     moment().format();
     console.log("getting info on " + searchTopic);
     axios.get("https://rest.bandsintown.com/artists/" + searchTopic + "/events?app_id=codingbootcamp")
@@ -29,7 +32,7 @@ var spotifyThisSong = function spotifyResponse(searchTopic) {
     if (searchTopic === undefined) {
         var searchTopic = "the sign ace of base"
     }
-    var Spotify = require('node-spotify-api');
+    
     var spotify = new Spotify(keys.spotify);
    
     ///spotify api request--when object returned, output the artists, song name, preview link of song, album 
@@ -48,7 +51,7 @@ var spotifyThisSong = function spotifyResponse(searchTopic) {
 }
 //omdb function
 var movieThis = function omdbResponse() {
-    var axios = require("axios");
+    
     //http request
     axios.get("http://www.omdbapi.com/?t=" + searchTopic + "&y=&plot=short&apikey=trilogy").then
         (function (response) {
@@ -56,35 +59,33 @@ var movieThis = function omdbResponse() {
                 var searchTopic = "mr Nobody";
             }
             console.log("Title: " + response.data.Title);
-            console.log("Release Year" + response.data.Year);
+            console.log("Release Year: " + response.data.Year);
             console.log("IMDB Rating: " + response.data.imdbRating);
             console.log("Rotten Tomatoes Rating: " + response.data.value);
             console.log("Produced in " + response.data.Country + ".");
-            console.log("Language is in " + response.data.Language + ".");
+            console.log("Language spoken is " + response.data.Language + ".");
             console.log("Plot: " + response.data.Plot);
             console.log("Actors: " + response.data.Actors);
         })
 }
 function doItResponse() {
-var fs = require("fs");
+
 fs.readFile("random.txt", "utf8", function(error, data){
     if (error) {
         console.log("error");
     }
 
-doItResponseResults = data.split(",");
+doItResponseResults  = data.split(",");
 console.log(doItResponseResults);
-for (var i = 0; i<doItResponseResults.length; ) {
-    var searchTopic = doItResponseResults[i];
-spotifyThisSong(searchTopic);
+spotifyThisSong(doItResponseResults[1]);
 
-movieThis(doItResponseResults[i]);
-
-concertThis(doItResponseResults[i]);
-fs.appendFile("log.txt");
-}
+fs.appendFile("log.txt", doItResponseResults,function(err, data) {
+    console.log('appended to file');
+});
 })
 }
+//})
+//}
 ///command center
 if (operator == 'concert-this') {
     console.log("Upcoming concert information for " + searchTopic);
