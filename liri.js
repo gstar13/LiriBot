@@ -7,7 +7,10 @@ var Spotify = require('node-spotify-api');
 
 //global variables
 var operator = process.argv[2];
-var searchTopic = process.argv[3];
+// Joining the remaining arguments since an actor or tv show name may contain spaces
+var searchTopic = process.argv.slice(3).join(" ");
+
+
 //function center
 //Bands In Town
 var concertThis = function bandsInTownResponse() {
@@ -76,7 +79,7 @@ fs.readFile("random.txt", "utf8", function(error, data){
     }
 
 doItResponseResults  = data.split(",");
-console.log(doItResponseResults);
+
 spotifyThisSong(doItResponseResults[1]);
 
 fs.appendFile("log.txt", doItResponseResults,function(err, data) {
